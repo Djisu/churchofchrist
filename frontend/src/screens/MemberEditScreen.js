@@ -146,7 +146,7 @@ export default function MemberEditScreen(props) {
 
   const handleGenderChange = (e) => {
     setGender(e.target.value)
-    //console.log('e.target.value==', e.target.value)
+    console.log('e.target.value==', e.target.value)
   }
 
   return (
@@ -185,30 +185,15 @@ export default function MemberEditScreen(props) {
             </div>
             <div>
               <label htmlFor="gender">Gender</label>
-              <select
-                onChange={(e) => handleGenderChange(e)}
-                className="browser-default custom-select"
-              >
-                {itemsGender.map((itemGender) => (
-                  <option key={itemGender.value} value={itemGender.value}>
-                    {itemGender.label}
-                  </option>
-                ))}
-              </select>
-              {/*  <input
+              <input
                 id="gender"
                 type="text"
-                placeholder="Enter gender"
+                placeholder="Enter either male or female"
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
-              ></input> */}
+              ></input>
             </div>
             <div>
-              <label htmlFor="dob">Date of Birth</label>
-              {/* <DatePicker
-                selected={dob}
-                onChange={(date) => setDob(date)}
-              /> */}
               <input
                 id="dob"
                 type="date"
@@ -219,7 +204,14 @@ export default function MemberEditScreen(props) {
             </div>
             <div>
               <label htmlFor="marital_status">Marital Status</label>
-              <select
+              <input
+                id="marital_status"
+                type="text"
+                placeholder="Enter either married or single"
+                value={marital_status}
+                onChange={(e) => setMarital_status(e.target.value)}
+              ></input>
+              {/*   <select
                 onChange={(e) => handleMaritalStatusChange(e)}
                 className="browser-default custom-select"
               >
@@ -228,14 +220,7 @@ export default function MemberEditScreen(props) {
                     {item.label}
                   </option>
                 ))}
-              </select>
-              {/*  <input
-                id="marital_status"
-                type="text"
-                placeholder="Enter marital status"
-                value={marital_status}
-                onChange={(e) => setMarital_status(e.target.value)}
-              ></input> */}
+              </select> */}
             </div>
             <div>
               <label htmlFor="telno">Mobile No</label>
