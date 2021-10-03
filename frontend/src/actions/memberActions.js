@@ -18,9 +18,8 @@ import {
 } from '../constants/memberContants'
 
 export const listMembers = ({ surname = '' }) => async (dispatch) => {
-  /* console.log('====================================')
   console.log('in listMembers memberActions', surname)
-  console.log('====================================') */
+
   dispatch({ type: MEMBER_LIST_REQUEST })
 
   try {
