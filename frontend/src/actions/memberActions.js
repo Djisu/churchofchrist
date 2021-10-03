@@ -9,9 +9,6 @@ import {
   MEMBER_DETAILS_FAIL,
   MEMBER_DETAILS_REQUEST,
   MEMBER_DETAILS_SUCCESS,
-  MEMBER_GET_FAIL,
-  MEMBER_GET_REQUEST,
-  MEMBER_GET_SUCCESS,
   MEMBER_LIST_FAIL,
   MEMBER_LIST_REQUEST,
   MEMBER_LIST_SUCCESS,
@@ -20,10 +17,10 @@ import {
   MEMBER_UPDATE_SUCCESS,
 } from '../constants/memberContants'
 
-export const listMembers = ({surname=''}) => async (dispatch) => {
-  console.log('====================================');
-  console.log('in listMembers memberActions', surname);
-  console.log('====================================');
+export const listMembers = ({ surname = '' }) => async (dispatch) => {
+  /* console.log('====================================')
+  console.log('in listMembers memberActions', surname)
+  console.log('====================================') */
   dispatch({ type: MEMBER_LIST_REQUEST })
 
   try {
@@ -137,7 +134,7 @@ export const deleteMember = (memberId) => async (dispatch, getState) => {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     })
 
-    dispatch({ type: MEMBER_DELETE_SUCCESS })
+    dispatch({ type: MEMBER_DELETE_SUCCESS, payload: data })
   } catch (error) {
     const message =
       error.response && error.response.data.message

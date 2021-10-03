@@ -123,7 +123,7 @@ export default function MemberEditScreen(props) {
     }
   }
 
-  const [items] = React.useState([
+  /* const [items] = React.useState([
     {
       label: 'Married',
       value: 'married',
@@ -148,7 +148,7 @@ export default function MemberEditScreen(props) {
     setGender(e.target.value)
     console.log('e.target.value==', e.target.value)
   }
-
+ */
   return (
     <div>
       <form className="form" onSubmit={submitHandler}>
