@@ -19,7 +19,7 @@ export default function Member(props) {
       {/* <a href={`/member/${member._id}`}> */}
       <img
         className="small-medium"
-        src={member.image || 'http://via.placeholder.com/170X2'}
+        src={member.image || 'http://via.placeholder.com/200X200'}
         alt={member.name}
       />
       {/* </a> */}

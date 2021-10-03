@@ -9,14 +9,17 @@ const memberRouter = express.Router()
 memberRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
-    console.log('in memberRoute.get', req.query.other_names)
-   /*  const other_names = req.query.other_names || ''
-    //const seller = req.query.seller || '';
-    const other_namesFilter = other_names
-      ? { other_names: { $regex: other_names, $options: 'i' } }
-      : {} */
+    console.log('in memberRoute.get', req.params.surname)
+
+    const surname = req.query.surname || ''
+
+    const surnameFilter = surname
+      ? { surname: { $regex: surname, $options: 'i' } }
+      : {}
     // const sellerFilter = seller ? { seller } : {};
-    const members = await Member.find({})
+    const members = await Member.find({
+      ...surnameFilter,
+    })
 
     res.send(members)
   }),
@@ -34,6 +37,7 @@ memberRouter.get(
 memberRouter.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
+    console.log('WHO ARE YOU?')
     const member = await Member.findById(req.params.id)
     if (member) {
       res.send(member)
@@ -43,6 +47,26 @@ memberRouter.get(
   }),
 )
 
+memberRouter.get(
+  '/:surname',
+  expressAsyncHandler(async (req, res) => {
+    console.log('in memberRouter.get', 'kofi is good')
+
+    if (!req) {
+      console.log('No req found')
+      return
+    }
+
+    const member = await Member.find({ surname: req.params.surname })
+    if (member) {
+      console.log('member found', member)
+
+      res.send(member)
+    } else {
+      res.status(404).send({ message: 'Members not found' })
+    }
+  }),
+)
 //'/api/members'
 memberRouter.post(
   '/',

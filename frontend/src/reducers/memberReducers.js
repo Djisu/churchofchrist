@@ -10,6 +10,9 @@ import {
   MEMBER_DETAILS_FAIL,
   MEMBER_DETAILS_REQUEST,
   MEMBER_DETAILS_SUCCESS,
+  MEMBER_GET_FAIL,
+  MEMBER_GET_REQUEST,
+  MEMBER_GET_SUCCESS,
   MEMBER_LIST_FAIL,
   MEMBER_LIST_REQUEST,
   MEMBER_LIST_SUCCESS,
@@ -105,6 +108,22 @@ export const memberDeleteReducer = (state = {}, action) => {
 
     case MEMBER_DELETE_RESET:
       return {}
+
+    default:
+      return state
+  }
+}
+
+export const memberGetReducer = (state = {}, action) => {
+  switch (action.type) {
+    case MEMBER_GET_REQUEST:
+      return { loading: true }
+
+    case MEMBER_GET_SUCCESS:
+      return { loading: false, payload: action.payload }
+
+    case MEMBER_GET_FAIL:
+      return { loading: false, error: action.payload }
 
     default:
       return state

@@ -4,6 +4,7 @@ import {
   memberCreateReducer,
   memberDeleteReducer,
   memberDetailsReducer,
+  memberGetReducer,
   memberListReducer,
   memberUpdateReducer,
 } from './reducers/memberReducers'
@@ -34,6 +35,7 @@ const reducer = combineReducers({
   memberCreate: memberCreateReducer,
   memberUpdate: memberUpdateReducer,
   memberDelete: memberDeleteReducer,
+  memberGet: memberGetReducer,
   userList: userListReducer,
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,

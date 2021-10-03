@@ -9,6 +9,9 @@ import {
   MEMBER_DETAILS_FAIL,
   MEMBER_DETAILS_REQUEST,
   MEMBER_DETAILS_SUCCESS,
+  MEMBER_GET_FAIL,
+  MEMBER_GET_REQUEST,
+  MEMBER_GET_SUCCESS,
   MEMBER_LIST_FAIL,
   MEMBER_LIST_REQUEST,
   MEMBER_LIST_SUCCESS,
@@ -17,11 +20,14 @@ import {
   MEMBER_UPDATE_SUCCESS,
 } from '../constants/memberContants'
 
-export const listMembers = () => async (dispatch) => {
+export const listMembers = ({surname=''}) => async (dispatch) => {
+  console.log('====================================');
+  console.log('in listMembers memberActions', surname);
+  console.log('====================================');
   dispatch({ type: MEMBER_LIST_REQUEST })
 
   try {
-    const { data } = await Axios.get('/api/members')
+    const { data } = await Axios.get(`/api/members?surname=${surname}`)
 
     dispatch({ type: MEMBER_LIST_SUCCESS, payload: data })
   } catch (err) {
@@ -29,6 +35,27 @@ export const listMembers = () => async (dispatch) => {
   }
 }
 
+/* export const getMember = (surname) => async (dispatch) => {
+  console.log('in memberAction getMember', surname)
+
+  dispatch({ type: MEMBER_GET_REQUEST, payload: surname })
+
+  try {
+   
+    const { data } = await Axios.get(`/api/members?surname=${surname}`)
+
+    dispatch({ type: MEMBER_GET_SUCCESS, payload: data })
+  } catch (err) {
+    dispatch({
+      type: MEMBER_GET_FAIL,
+      payload:
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message,
+    })
+  }
+}
+ */
 export const detailsMember = (memberId) => async (dispatch) => {
   dispatch({ type: MEMBER_DETAILS_REQUEST, payload: memberId })
 

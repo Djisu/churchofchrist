@@ -33,13 +33,13 @@ function App() {
               Church of Christ - 18 Junction
             </a>
           </div>
-          {/*          <div>
+          <div>
             <Route
               render={({ history }) => (
                 <SearchBox history={history}></SearchBox>
               )}
             ></Route>
-          </div> */}
+          </div>
           <div>
             {userInfo ? (
               <div className="dropdown">
@@ -84,11 +84,11 @@ function App() {
           ></Route>
           <Route path="/register" component={RegisterScreen}></Route>
           <Route path="/signin" component={SigninScreen}></Route>
-          {/*  <Route
-            path="/search/other_names/:other_names?"
+          <Route
+            path="/search/surname/:surname?"
             component={SearchScreen}
             exact
-          ></Route> */}
+          ></Route>
           <AdminRoute
             path="/memberlist"
             component={MemberListScreen}
