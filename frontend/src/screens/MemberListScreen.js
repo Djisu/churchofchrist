@@ -43,7 +43,9 @@ export default function MemberListScreen(props) {
       dispatch({ type: MEMBER_DELETE_RESET })
     }
 
-    dispatch(listMembers())
+   const surname = ''
+    dispatch(listMembers({ surname }))
+
   }, [dispatch, successCreate, createdMember, successDelete, props.history])
 
   const deleteHandler = (member) => {

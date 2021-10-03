@@ -11,7 +11,8 @@ export default function HomeScreen(props) {
   const { loading, error, members } = memberList
 
   useEffect(() => {
-    dispatch(listMembers())
+    const surname = ''
+    dispatch(listMembers({ surname }))
   }, [dispatch])
 
   return (
