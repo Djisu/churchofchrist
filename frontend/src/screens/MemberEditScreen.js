@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Axios from 'axios'
+import dateFormat from 'dateformat'
 import { detailsMember, updateMember } from '../actions/memberActions'
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
@@ -52,10 +53,13 @@ export default function MemberEditScreen(props) {
     if (!member || member._id !== memberId) {
       dispatch(detailsMember(memberId))
     } else {
+      let newDate = dateFormat(member.dob, 'dd-mm-yyyy')
+
       setSurname(member.surname)
       setOther_names(member.other_names)
       setGender(member.gender)
-      setDob(member.dob)
+      // setDob(member.dob)
+      setDob(newDate)
       setMarital_status(member.marital_status)
       setTelno(member.telno)
       setRes_address(member.res_address)
@@ -194,7 +198,9 @@ export default function MemberEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="dob">Date of Birth</label>
+              <label htmlFor="dob">
+                Date of Birth: {dateFormat(member.dob, 'dd-mm-yyyy')}
+              </label>
               <input
                 id="dob"
                 type="date"

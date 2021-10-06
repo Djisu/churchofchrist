@@ -75,6 +75,11 @@ a.brand {
 img {
   border-radius: 0.5rem;
 }
+img.small {
+  max-width: 2rem;
+  display: block;
+  padding: 1rem;
+}
 img.medium {
   max-width: 29rem;
   /* width: 100%; */

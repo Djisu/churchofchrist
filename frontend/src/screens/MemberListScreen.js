@@ -92,8 +92,8 @@ export default function MemberListScreen(props) {
               <tr key={member._id}>
                 <td>
                   <img
-                    className="small-medium"
-                    src={member.image || 'http://via.placeholder.com/200X200'}
+                    className="small"
+                    src={member.image || 'http://via.placeholder.com/50X50'}
                     alt={member.name}
                   />
                 </td>
