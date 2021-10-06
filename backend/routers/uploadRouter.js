@@ -15,11 +15,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage })
 
-/* uploadRouter.post('/', isAuth, upload.single('image'), (req, res) => {
-  res.send(`/${req.file.path}`);
-}); */
 uploadRouter.post('/', isAuth, upload.single('image'), (req, res) => {
-  res.send(`/${req.file.path}`)
+  console.log('in backend uploadRouter.post', `/uploads/${req.file.filename}`) // rememeber to add /
+  res.send(`/uploads/${req.file.filename}`)
 })
 
 export default uploadRouter

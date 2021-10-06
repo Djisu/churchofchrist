@@ -28,6 +28,10 @@ app.use('/api/members', memberRouter)
 // git
 
 const __dirname = path.resolve()
+
+/* const moo = __dirname + '/uploads'
+console.log('moo===', moo) */
+
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 app.use(express.static(path.join(__dirname, '/frontend/build')))

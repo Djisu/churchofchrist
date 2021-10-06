@@ -48,6 +48,7 @@ export default function MemberEditScreen(props) {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: MEMBER_UPDATE_RESET })
+      //TOBE RESETED LATER
       props.history.push('/memberlist')
     }
     if (!member || member._id !== memberId) {
@@ -77,6 +78,12 @@ export default function MemberEditScreen(props) {
   const submitHandler = (e) => {
     e.preventDefault()
     //TODO: dispatch update member
+    console.log('in submitHandler')
+
+    console.log('image==', image)
+
+    member.image = image
+    setImage(image)
 
     dispatch(
       updateMember({
@@ -100,6 +107,7 @@ export default function MemberEditScreen(props) {
     )
   }
 
+  //Upload file hnandler
   const [loadingUpload, setLoadingUpload] = useState(false)
   const [errorUpload, setErrorUpload] = useState('')
 
@@ -107,10 +115,17 @@ export default function MemberEditScreen(props) {
   const { userInfo } = userSignin
 
   const uploadFileHandler = async (e) => {
+    console.log('in uploadFileHandler')
+
     const file = e.target.files[0]
+
+    //console.log('file', file)
+
     const bodyFormData = new FormData()
     bodyFormData.append('image', file)
     setLoadingUpload(true)
+
+    console.log('bodyFormData==', bodyFormData)
 
     try {
       const { data } = await Axios.post('/api/uploads', bodyFormData, {
@@ -126,6 +141,7 @@ export default function MemberEditScreen(props) {
       setLoadingUpload(false)
     }
   }
+  //End
 
   /* const [items] = React.useState([
     {
@@ -319,7 +335,7 @@ export default function MemberEditScreen(props) {
               <input
                 id="image"
                 type="text"
-                placeholder="Enter image"
+                placeholder="Enter ONLY JPG OR JPG image"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></input>
@@ -336,6 +352,7 @@ export default function MemberEditScreen(props) {
               {errorUpload && (
                 <MessageBox variant="danger">{errorUpload}</MessageBox>
               )}
+              <img className="small-medium" src={image} alt={member.name} />
             </div>
             <div>
               <label htmlFor="gpAddress">GP Address</label>
