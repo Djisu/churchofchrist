@@ -194,6 +194,7 @@ export default function MemberEditScreen(props) {
               ></input>
             </div>
             <div>
+              <label htmlFor="dob">Date of Birth</label>
               <input
                 id="dob"
                 type="date"
