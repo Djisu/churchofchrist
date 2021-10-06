@@ -43,9 +43,8 @@ export default function MemberListScreen(props) {
       dispatch({ type: MEMBER_DELETE_RESET })
     }
 
-   const surname = ''
+    const surname = ''
     dispatch(listMembers({ surname }))
-
   }, [dispatch, successCreate, createdMember, successDelete, props.history])
 
   const deleteHandler = (member) => {
@@ -80,6 +79,7 @@ export default function MemberListScreen(props) {
         <table className="table">
           <thead>
             <tr>
+              <th>IMAGE</th>
               <th>SURNAME</th>
               <th>OTHER NAMES</th>
               <th>MOBILE NO</th>
@@ -90,6 +90,13 @@ export default function MemberListScreen(props) {
           <tbody>
             {members.map((member) => (
               <tr key={member._id}>
+                <td>
+                  <img
+                    className="small-medium"
+                    src={member.image || 'http://via.placeholder.com/200X200'}
+                    alt={member.name}
+                  />
+                </td>
                 <td>{member.surname}</td>
                 <td>{member.other_names}</td>
                 <td>{member.telno}</td>
