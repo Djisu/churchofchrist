@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
@@ -8,6 +8,9 @@ export default function Member(props) {
 
   const userSignin = useSelector((state) => state.userSignin)
   const { userInfo } = userSignin
+
+  //Use this to reduce or increase displayed field length
+  const [readMore, setReadMore] = useState(false)
 
   const handleClick = (id) => {
     console.log('member:', member)
@@ -31,6 +34,12 @@ export default function Member(props) {
         </h2>
         <h2>Gender: {member.gender}</h2>
         <h5>Mobile Phone No: {member.telno}</h5>
+        <p>
+          {readMore ? member.telno : `${member.telno.substring(0, 10)}...`}
+          <button onClick={() => setReadMore(!readMore)}>
+            {readMore ? 'show less' : 'read more'}
+          </button>
+        </p>
         <h5>Occupation: {member.occupation}</h5>
       </div>
       {userInfo && userInfo.isAdmin && (

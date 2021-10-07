@@ -14,7 +14,7 @@ export default function SearchBox(props) {
         <input
           type="text"
           surname="q"
-          placeholder="Enter the surname"
+          placeholder="Search for surname"
           id="q"
           onChange={(e) => setSurname(e.target.value)}
         ></input>

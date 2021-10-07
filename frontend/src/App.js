@@ -30,7 +30,7 @@ function App() {
         <header className="row">
           <div>
             <a className="brand" href="/">
-              Church of Christ - 18 Junction
+              Church of Christ - 18 Junction, Spintex Road.
             </a>
           </div>
           <div>
