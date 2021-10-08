@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Axios from 'axios'
+import { storage } from '../firebase'
 import dateFormat from 'dateformat'
 import { detailsMember, updateMember } from '../actions/memberActions'
 import LoadingBox from '../components/LoadingBox'
@@ -30,8 +31,13 @@ export default function MemberEditScreen(props) {
   const [emergency_contact_name, setEmergency_contact_name] = useState('')
   const [emergency_contact_no, setEmergency_contact_no] = useState('')
   const [description, setDescription] = useState('')
-  const [image, setImage] = useState('')
+  const [image, setImage] = useState([])
   const [gpAddress, setGpAddress] = useState('')
+
+  //Upload file new codes
+  const [url, setUrl] = useState(null)
+  const [progress, setProgress] = useState(0)
+  //
 
   const memberDetails = useSelector((state) => state.memberDetails)
   const { loading, error, member } = memberDetails
@@ -44,6 +50,18 @@ export default function MemberEditScreen(props) {
   } = memberUpdate
 
   const dispatch = useDispatch()
+
+  //Upload image new code
+  const state = {
+    button: 1,
+  }
+
+  const handleChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0])
+    }
+  }
+  //
 
   useEffect(() => {
     if (successUpdate) {
@@ -77,34 +95,74 @@ export default function MemberEditScreen(props) {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    //TODO: dispatch update member
-    console.log('in submitHandler')
 
-    console.log('image==', image)
+    //Upload image new codes
+    if (state.button === 1) {
+      console.log('instate.button === 1 uploadImage')
 
-    member.image = image
-    setImage(image)
+      const uploadTask = storage.ref(`images/${image.name}`).put(image)
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
+          )
+          setProgress(progress)
+        },
+        (error) => {
+          console.log(error)
+        },
+        () => {
+          storage
+            .ref('images')
+            .child(image.name)
+            .getDownloadURL()
+            .then((url) => {
+              setUrl(url)
+            })
+        },
+      )
+    }
 
-    dispatch(
-      updateMember({
-        _id: memberId,
-        surname,
-        other_names,
-        gender,
-        dob,
-        marital_status,
-        telno,
-        res_address,
-        occupation,
-        place_of_work,
-        location_of_work,
-        emergency_contact_name,
-        emergency_contact_no,
-        description,
-        image,
-        gpAddress,
-      }),
-    )
+    if (state.button === 2) {
+      //
+      //TODO: dispatch update member
+      console.log('in submitHandler')
+
+      console.log(
+        'document.querySelector(img).src',
+        document.querySelector('img').src,
+      )
+
+      let image = document.querySelector('img').src
+
+      console.log('image==', image)
+
+      member.image = image
+      //setImage(image)
+
+      dispatch(
+        updateMember({
+          _id: memberId,
+          surname,
+          other_names,
+          gender,
+          dob,
+          marital_status,
+          telno,
+          res_address,
+          occupation,
+          place_of_work,
+          location_of_work,
+          emergency_contact_name,
+          emergency_contact_no,
+          description,
+          image,
+          gpAddress,
+        }),
+        setImage([]),
+      )
+    }
   }
 
   //Upload file hnandler
@@ -330,7 +388,33 @@ export default function MemberEditScreen(props) {
                 onChange={(e) => setDescription(e.target.value)}
               ></textarea>
             </div>
+
             <div>
+              <br />
+              Select image/photo for member
+              <br />
+              <progress value={progress} max="100" />
+              <br />
+              <input type="file" onChange={handleChange} />
+              <button
+                className="primary"
+                type="submit"
+                onClick={() => (state.button = 1)}
+              >
+                Upload
+              </button>
+              <br />
+              {url}
+              <br />
+              <img
+                className="small-medium"
+                src={url || 'http://via.placeholder.com/200X200'}
+                alt="firebase-imagex"
+              />
+              <br />
+            </div>
+
+            {/*           <div>
               <label htmlFor="image">Image</label>
               <input
                 id="image"
@@ -339,8 +423,8 @@ export default function MemberEditScreen(props) {
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></input>
-            </div>
-            <div>
+            </div> */}
+            {/*      <div>
               <label htmlFor="imageFile">Image File</label>
               <input
                 type="file"
@@ -353,7 +437,11 @@ export default function MemberEditScreen(props) {
                 <MessageBox variant="danger">{errorUpload}</MessageBox>
               )}
               <img className="small-medium" src={image} alt={member.name} />
-            </div>
+            </div> */}
+            {loadingUpload && <LoadingBox></LoadingBox>}
+            {errorUpload && (
+              <MessageBox variant="danger">{errorUpload}</MessageBox>
+            )}
             <div>
               <label htmlFor="gpAddress">GP Address</label>
               <input
@@ -366,7 +454,11 @@ export default function MemberEditScreen(props) {
             </div>
             <div>
               <label />
-              <button className="primary" type="submit">
+              <button
+                className="primary"
+                type="submit"
+                onClick={() => (state.button = 2)}
+              >
                 Update
               </button>
             </div>

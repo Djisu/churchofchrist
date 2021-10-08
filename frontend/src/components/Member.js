@@ -33,9 +33,9 @@ export default function Member(props) {
           {member.other_names} {member.surname}
         </h2>
         <h2>Gender: {member.gender}</h2>
-        <h5>Mobile Phone No: {member.telno}</h5>
+        {/* <h5>Mobile Phone No: {member.telno}</h5> */}
         <p>
-          {readMore ? member.telno : `${member.telno.substring(0, 10)}...`}
+          {readMore ? member.telno : `${member.telno.substring(0, 5)}...`}
           <button onClick={() => setReadMore(!readMore)}>
             {readMore ? 'show less' : 'read more'}
           </button>

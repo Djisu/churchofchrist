@@ -102,6 +102,8 @@ memberRouter.put(
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
+    console.log('in memberRoute.put', req.body)
+
     const memberId = req.params.id
     const member = await Member.findById(memberId)
 
