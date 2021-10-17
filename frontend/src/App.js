@@ -13,6 +13,9 @@ import UserListScreen from './screens/UserListScreen'
 import UserEditScreen from './screens/UserEditScreen'
 import SearchBox from './components/SearchBox'
 import SearchScreen from './screens/SearchScreen'
+import VisitorScreen from './screens/visitorScreen'
+import VisitorEditScreen from './screens/VisitorEditScreen'
+import VisitorListScreen from './screens/VisitorListScreen'
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin)
@@ -68,6 +71,9 @@ function App() {
                     <Link to="/memberlist">Members</Link>
                   </li>
                   <li>
+                    <Link to="/visitorlist">Visitors</Link>
+                  </li>
+                  <li>
                     <Link to="/userlist">Users</Link>
                   </li>
                 </ul>
@@ -82,6 +88,14 @@ function App() {
             component={MemberEditScreen}
             exact
           ></Route>
+
+          <Route path="/visitor/:id" component={VisitorScreen} exact></Route>
+          <Route
+            path="/visitor/:id/edit"
+            component={VisitorEditScreen}
+            exact
+          ></Route>
+
           <Route path="/register" component={RegisterScreen}></Route>
           <Route path="/signin" component={SigninScreen}></Route>
           <Route
@@ -92,6 +106,11 @@ function App() {
           <AdminRoute
             path="/memberlist"
             component={MemberListScreen}
+          ></AdminRoute>
+
+          <AdminRoute
+            path="/visitorlist"
+            component={VisitorListScreen}
           ></AdminRoute>
 
           <AdminRoute path="/userlist" component={UserListScreen}></AdminRoute>

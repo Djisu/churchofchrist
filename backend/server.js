@@ -5,6 +5,7 @@ import path from 'path'
 import memberRouter from './routers/memberRouter.js'
 import userRouter from './routers/userRouter.js'
 import uploadRouter from './routers/uploadRouter.js'
+import visitorRouter from './routers/visitorRouter.js'
 // import smsRouter from './routers/smsRouter.js'
 
 dotenv.config()
@@ -25,6 +26,7 @@ mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/church18', {
 app.use('/api/uploads', uploadRouter)
 app.use('/api/users', userRouter)
 app.use('/api/members', memberRouter)
+app.use('/api/visitors', visitorRouter)
 // git
 
 const __dirname = path.resolve()

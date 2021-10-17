@@ -90,7 +90,9 @@ img.small-medium {
   padding: 1rem;
 }
 img.large {
-  width: 100%;
+  /* width: 100%; */
+  max-width: 500px;
+  max-height: 500px;
 }
 /* Card */
 .card {

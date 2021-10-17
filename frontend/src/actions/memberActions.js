@@ -25,6 +25,8 @@ export const listMembers = ({ surname = '' }) => async (dispatch) => {
   try {
     const { data } = await Axios.get(`/api/members?surname=${surname}`)
 
+    console.log('data===', data)
+
     dispatch({ type: MEMBER_LIST_SUCCESS, payload: data })
   } catch (err) {
     dispatch({ type: MEMBER_LIST_FAIL, payload: err.message })
@@ -50,8 +52,8 @@ export const listMembers = ({ surname = '' }) => async (dispatch) => {
           : err.message,
     })
   }
-}
- */
+} */
+
 export const detailsMember = (memberId) => async (dispatch) => {
   dispatch({ type: MEMBER_DETAILS_REQUEST, payload: memberId })
 

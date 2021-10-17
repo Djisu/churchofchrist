@@ -1,5 +1,6 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
+
 import {
   memberCreateReducer,
   memberDeleteReducer,
@@ -8,6 +9,15 @@ import {
   memberListReducer,
   memberUpdateReducer,
 } from './reducers/memberReducers'
+
+import {
+  visitorCreateReducer,
+  visitorDeleteReducer,
+  visitorDetailsReducer,
+  visitorGetReducer,
+  visitorListReducer,
+  visitorUpdateReducer,
+} from './reducers/visitorReducers'
 import { smsMessageCreateReducer } from './reducers/smsMessageReducers'
 import {
   userDeleteReducer,
@@ -29,13 +39,22 @@ const initialState = {
 const reducer = combineReducers({
   memberList: memberListReducer,
   memberDetails: memberDetailsReducer,
-  userSignin: userSigninReducer,
-  userDetails: userDetailsReducer,
-  userRegister: userRegisterReducer,
   memberCreate: memberCreateReducer,
   memberUpdate: memberUpdateReducer,
   memberDelete: memberDeleteReducer,
   memberGet: memberGetReducer,
+
+  visitorList: visitorListReducer,
+  visitorDetails: visitorDetailsReducer,
+  visitorCreate: visitorCreateReducer,
+  visitorUpdate: visitorUpdateReducer,
+  visitorDelete: visitorDeleteReducer,
+  visitorGet: visitorGetReducer,
+
+  userSignin: userSigninReducer,
+  userDetails: userDetailsReducer,
+  userRegister: userRegisterReducer,
+
   userList: userListReducer,
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
