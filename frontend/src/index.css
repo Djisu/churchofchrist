@@ -75,13 +75,25 @@ a.brand {
 img {
   border-radius: 0.5rem;
 }
+
+
+img {
+  float: left;
+  width:  300px;
+  height: 400px;
+  object-fit: cover;
+}
 img.small {
   max-width: 2rem;
   display: block;
   padding: 1rem;
 }
 img.medium {
-  max-width: 29rem;
+  float: left;
+  width:  80px;
+  height: 80px;
+  object-fit: cover;
+  /* max-width: 40rem; */
   /* width: 100%; */
 }
 img.small-medium {
@@ -94,13 +106,22 @@ img.large {
   max-width: 500px;
   max-height: 500px;
 }
+
 /* Card */
 .card {
   border: 0.1rem #c0c0c0 solid;
   background-color: #f8f8f8;
   border-radius: 0.5rem;
-  margin: 1 rem;
+  margin: 1rem;
+  height: 100vh;
 }
+/* Card */
+/* .card {
+  border: 0.1rem #c0c0c0 solid;
+  background-color: #f8f8f8;
+  border-radius: 0.5rem;
+  margin: 1 rem;
+} */
 .card-body {
   padding: 1rem;
 }

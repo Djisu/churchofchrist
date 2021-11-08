@@ -21,8 +21,8 @@ export default function Member(props) {
     <div key={member._id} className="card">
       {/* <a href={`/member/${member._id}`}> */}
       <img
-        className="small-medium"
-        src={member.image || 'http://via.placeholder.com/200X200'}
+        className="smaill-medium"
+        src={member.image || 'http://via.placeholder.com/50X50'}
         alt={member.name}
       />
       {/* </a> */}
